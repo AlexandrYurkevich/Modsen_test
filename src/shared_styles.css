@@ -20,4 +20,10 @@ a {
 .columned-container {
     display: flex;
     flex-direction: column;
+    gap: 5px;
+}
+
+.flex-container {
+    display: flex;
+    align-items: center;
 }
