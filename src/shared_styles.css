@@ -1,11 +1,27 @@
 body {
     margin:0;
-    font-family:'Roboto', Arial, sans-serif;
+    font-family: 'Mont', sans-serif;
 }
 
 a {
     text-decoration: none;
     color: black;
+}
+
+@font-face {
+    font-family: 'Mont';
+    src: url('/public/Mont-Regular.eot');
+    src: local('Mont Regular'), local('Mont-Regular'),
+    url('/public/Mont-Regular.eot?#iefix') format('embedded-opentype'),
+    url('/public/Mont-Regular.woff2') format('woff2'),
+    url('/public/Mont-Regular.woff') format('woff'),
+    url('/public/Mont-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+    font-family: 'Mont', sans-serif;
 }
 
 .full-page-container {

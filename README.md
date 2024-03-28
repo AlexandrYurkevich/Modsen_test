@@ -35,4 +35,3 @@
 
 Приблизительный дизайн:
 https://www.figma.com/file/UlFWoJkkuGfziLMIxRm8s1/Mappie?type=design&node-id=0-1&t=FiyHiv6aM4ASSQAm-0
-
