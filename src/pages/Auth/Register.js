@@ -11,16 +11,16 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import { AuthContext } from '../../contexts/AuthContext';
 
 //Mui template
 export default function Register() {
+  const { signUp } = React.useContext(AuthContext);
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+    signUp(data.get('email'), data.get('password'), data.get('firstName'), data.get('lastname'));
   };
 
   return (

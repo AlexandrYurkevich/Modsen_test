@@ -52,11 +52,10 @@
 .scroll-list::-webkit-scrollbar {
     width: 5px;
     height: 8px;
-    background-color: #848484;;
 }
 
 .scroll-list::-webkit-scrollbar-thumb {
-    background: #848484;
+    background-color: #848484;
     border-radius: 2px;
 }
 

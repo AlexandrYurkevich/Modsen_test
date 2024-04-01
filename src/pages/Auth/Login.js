@@ -12,17 +12,15 @@ import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { useTheme } from '@mui/material';
+import { AuthContext } from '../../contexts/AuthContext';
 
-//Mui template
 export default function SignInSide() {
+  const { signIn } = React.useContext(AuthContext);
   const theme = useTheme();
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+    signIn(data.get('email'), data.get('password'));
   };
 
   return (
