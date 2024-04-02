@@ -18,8 +18,24 @@
     display: flex;
     flex-direction: column;
     padding: 15px;
+    gap: 5px;
     height: 100vh;
+    width: 300px;
     box-sizing: border-box;
+}
+
+.minidesc {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.bigdesc {
+    max-height: 30vh;
+    width: 100%;
+    align-items:flex-start;
+    overflow-y: auto;
 }
 
 .close-button {
@@ -34,6 +50,51 @@
     border-radius: 5px;
 }
 
+.bookmark-element {
+    width: 100%;
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+.dummy-thumbnail {
+    width:40%;
+    padding-top: 15%;
+    padding-bottom: 15%;
+    position: relative;
+    background-color: #848484;
+}
+
+.bookmark-name {
+    width: 60%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.profiling {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.dummy-thumbnail-big {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    width: 100%;
+    padding-top: 30%;
+    padding-bottom: 30%;
+    box-sizing: border-box;
+    background-color: #848484;
+}
+
+.dummy-category {
+    transform: scale(0.5);
+    position: absolute;
+    bottom: -5px;
+    right: -5px;
+}
+
 .categories {
     max-height: 40vh;
     display: flex;
@@ -44,6 +105,7 @@
 
 .places-list {
     flex-grow: 1;
+    gap: 5px;
     display: flex;
     flex-direction: column;
     overflow-y: auto;

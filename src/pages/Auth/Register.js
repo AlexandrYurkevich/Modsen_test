@@ -20,7 +20,7 @@ export default function Register() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    signUp(data.get('email'), data.get('password'), data.get('firstName'), data.get('lastname'));
+    signUp(data.get('email'), data.get('password'), data.get('firstName'), data.get('lastName'));
   };
 
   return (

@@ -6,17 +6,13 @@ import 'leaflet-routing-machine';
 import Openrouteservice from 'openrouteservice-js';
 import { LocationIcon } from "./MarkerIcons";
 import { MapContext } from "../../contexts/MapContext";
-import { categories } from "./MapPage";
+import { getCategoryIcon } from "./MapPage";
 
 const TILELAYER_URL = process.env.REACT_APP_TILELAYER_URL;
 const OPENROUTE_KEY = process.env.REACT_APP_OPENROUTE_KEY;
 
-function getCategoryIcon(amenity){
-  return categories.find((cat)=>cat.amenities.includes(amenity)).icon;
-}
-
 export default function Map() {
-  const {places,setPlaces,radius,selectedPlace, setSelectedPlace, setTab,
+  const {places,setPlaces,radius,selectedPlace, setSelectedPlace, setTab,profiling,
     center,setCenter, setDistance, setTime, loadPlacesWithinRadius} = useContext(MapContext)
   const [route,setRoute] = useState(null)
 
@@ -28,7 +24,7 @@ export default function Map() {
       const userLoaction = [location.latitude, location.longitude];
       setCenter(userLoaction);
       map.flyTo(userLoaction,17, {animate: false})
-      loadPlacesWithinRadius(userLoaction, radius)
+      loadPlacesWithinRadius(userLoaction, radius).then((data) => setPlaces(data))
     }
   })
 
@@ -45,7 +41,7 @@ export default function Map() {
 
     orsDirections.calculate({
       coordinates: [[center[1],center[0]],[selectedPlace?.position[1],selectedPlace?.position[0]]],
-      profile: "driving-car",
+      profile: profiling,
       extra_info: ["waytype", "steepness"],
       format: "geojson",
       api_version: 'v2'
@@ -62,7 +58,7 @@ export default function Map() {
         }
       }
     })
-  },[selectedPlace,center])
+  },[selectedPlace,center, profiling])
 
 	return (
 		<>
@@ -84,7 +80,7 @@ export default function Map() {
           radius={15}
         />
 			</Marker>
-      {places.map((place) => <Marker
+      {places?.map((place) => <Marker
         key={place.id}
         position={place.position}
         icon={getCategoryIcon(place.tags.amenity)}

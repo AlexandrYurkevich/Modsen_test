@@ -20,6 +20,12 @@ a {
     font-style: normal;
 }
 
+.MuiTypography-root {
+    font-family: 'Mont', sans-serif;
+    word-wrap: break-word;
+    text-overflow: ellipsis;
+}
+
 * {
     font-family: 'Mont', sans-serif;
 }
@@ -41,6 +47,7 @@ a {
 }
 
 .flex-container {
+    width: 100%;
     display: flex;
     align-items: center;
 }
