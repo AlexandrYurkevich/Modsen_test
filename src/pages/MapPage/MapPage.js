@@ -224,8 +224,8 @@ export default function MapPage() {
                                 "primary"
                             } startIcon={<BookmarkIcon/>}
                             onClick={()=>bookmarks.some(b=>b.id == selectedPlace.id)
-                                ? deleteBookmark(user.uid, selectedPlace.id)
-                                : saveBookmark(user.uid, selectedPlace)}
+                                ? deleteBookmark(user?.uid, selectedPlace.id)
+                                : saveBookmark(user?.uid, selectedPlace)}
                             >{bookmarks.some(b=>b.id == selectedPlace.id)
                             ? "Saved" : "Save bookmark"}</Button>
                         </div>

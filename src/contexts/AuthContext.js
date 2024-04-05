@@ -30,19 +30,16 @@ export const AuthContextProvider = ({ children }) => {
       userId: userId,
       place: place
     };
-    console.log(newPlaceData)
     const docRef = await addDoc(bookmarksCollection, newPlaceData);
-    console.log(docRef)
     setBookmarks([...bookmarks, place]);
   }
 
   async function getBookmarks(userId) {
+    if(!userId) { return }
     const bookmarksCollection = collection(firestore, 'bookmarks');
   
     const q = query(bookmarksCollection, where('userId', '==', userId));
     const querySnapshot = await getDocs(q);
-    console.log(querySnapshot.docs)
-    console.log(querySnapshot.docs.map((doc)=> doc.data().place))
     setBookmarks(querySnapshot.docs.map((doc)=> doc.data().place));
   }
 
@@ -51,10 +48,8 @@ export const AuthContextProvider = ({ children }) => {
     const q = query(bookmarksCollection, where('userId', '==', userId), where('place.id', '==', placeId));
   
     const querySnapshot = await getDocs(q);
-    console.log(querySnapshot)
     querySnapshot.forEach(async (el) => {
       const placeRef = doc(bookmarksCollection, el.id);
-      console.log(el.id)
       await deleteDoc(placeRef);
     });
     setBookmarks(bookmarks.filter(b=>b.id != placeId))
@@ -90,7 +85,7 @@ export const AuthContextProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth,(user) => {
       setUser(user);
-      getBookmarks(user.uid)
+      getBookmarks(user?.uid)
     });
     return () => unsubscribe();
   }, []);

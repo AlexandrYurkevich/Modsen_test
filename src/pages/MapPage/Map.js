@@ -35,23 +35,17 @@ export default function Map() {
   useEffect(()=>{
     if(!selectedPlace) return;
     
-    const orsDirections = new Openrouteservice.Directions({
-      api_key: OPENROUTE_KEY
-    })
+    const orsDirections = new Openrouteservice.Directions({ api_key: OPENROUTE_KEY })
 
     orsDirections.calculate({
       coordinates: [[center[1],center[0]],[selectedPlace?.position[1],selectedPlace?.position[0]]],
-      profile: profiling,
-      extra_info: ["waytype", "steepness"],
-      format: "geojson",
-      api_version: 'v2'
+      profile: profiling, extra_info: ["waytype", "steepness"], format: "geojson", api_version: 'v2'
     })
     
     .then(function(response) {
       if (response && response.features && response.features[0]) {
         const feature = response.features[0];
         if (feature.geometry && Array.isArray(feature.geometry.coordinates)) {
-          console.log("route is changed")
           setDistance(feature.properties.summary.distance)
           setTime(feature.properties.summary.duration)
           setRoute(feature.geometry.coordinates.map(coords=> [coords[1],coords[0]]));
@@ -80,14 +74,10 @@ export default function Map() {
           radius={15}
         />
 			</Marker>
-      {places?.map((place) => <Marker
-        key={place.id}
-        position={place.position}
-        icon={getCategoryIcon(place.tags.amenity)}
+      {places?.map((place) => <Marker key={place.id} position={place.position} icon={getCategoryIcon(place.tags.amenity)}
         eventHandlers={{ click: ()=> {
           setSelectedPlace(place);
           setTab(3);
-          console.log(place)
         }}}
       />)}
       {route && <Polyline positions={route}/>}
